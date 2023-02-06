@@ -1,26 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const [count, setCount] = useState(0);
+	const [stop, setStop] = useState(false);
+	useEffect(() => {
+		if (!stop) {
+			console.log(`Count updated to ${count}`);
+		}
+	}, [count, stop]);
+
+	return (
+		<div>
+			<p>You clicked {count} times</p>
+			<button onClick={() => !stop && setCount(count + 1)}>Click me</button>
+			<button onClick={() => setStop(!stop)}>{stop ? 'Start' : 'Stop'}</button>
+		</div>
+	);
 }
 
 export default App;
